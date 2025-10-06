@@ -23,11 +23,12 @@ gradlePlugin {
     vcsUrl = project.source
     plugins {
         curseforgegradle {
-            id = project.group
+            def name = project.archiveBaseName.toLowerCase()
+            id = "${project.group}.${name}"
             displayName = project.archiveBaseName
             description = project.description
             tags.set(['curseforge', 'mod'])
-            implementationClass = "net.darkhax.curseforgegradle.${project.archiveBaseName}Plugin"
+            implementationClass = "net.darkhax.${name}.${project.archiveBaseName}Plugin"
         }
     }
 }
