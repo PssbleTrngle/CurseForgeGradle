@@ -47,5 +47,11 @@ publishing {
                 }
             }
         }
+
+        if (System.getenv("GRADLE_PUBLISH_KEY") != null) {
+            gradlePluginPortal {
+                name = "gradle-plugin-portal"
+            }
+        }
     }
 }
