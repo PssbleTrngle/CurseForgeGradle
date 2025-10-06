@@ -6,7 +6,7 @@ plugins {
 }
 
 apply from: 'gradle/property_loader.gradle'
-def buildNumber = System.getenv('BUILD_NUMBER') ? System.getenv('BUILD_NUMBER') : System.getenv('TRAVIS_BUILD_NUMBER') ? System.getenv('TRAVIS_BUILD_NUMBER') : '0'
+def buildNumber = System.getenv('BUILD_NUMBER') ? System.getenv('BUILD_NUMBER') : '0'
 project.version = "${project.version}.${buildNumber}".toString()
 
 repositories {
@@ -26,8 +26,26 @@ gradlePlugin {
             id = project.group
             displayName = project.archiveBaseName
             description = project.description
-            tags.set(['curseforge', 'mod']) 
-            implementationClass = "${project.group}.${project.archiveBaseName}Plugin"
+            tags.set(['curseforge', 'mod'])
+            implementationClass = "net.darkhax.curseforgegradle.${project.archiveBaseName}Plugin"
+        }
+    }
+}
+
+publishing {
+    repositories {
+        mavenLocal()
+
+        def nexusToken = System.getenv("NEXUS_TOKEN")
+        def nexusUser = System.getenv("NEXUS_USER")
+        if (nexusToken != null && nexusUser != null) {
+            maven {
+                url = uri("https://registry.somethingcatchy.net/repository/maven-releases/")
+                credentials {
+                    username = nexusUser
+                    password = nexusToken
+                }
+            }
         }
     }
 }
