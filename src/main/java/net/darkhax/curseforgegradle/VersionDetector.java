@@ -1,14 +1,11 @@
 package net.darkhax.curseforgegradle;
 
-import net.darkhax.curseforgegradle.api.versions.GameVersions;
 import org.apache.groovy.util.Maps;
 import org.gradle.api.Project;
 import org.gradle.api.logging.Logger;
 import org.gradle.api.plugins.JavaPluginExtension;
 import org.gradle.api.provider.Property;
 import org.gradle.api.provider.Provider;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Sets;
 import org.gradle.jvm.toolchain.JavaLanguageVersion;
 
 import java.util.*;
